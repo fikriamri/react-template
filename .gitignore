@@ -1,23 +1,45 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#
+# IGNORING SOME FILE INSIDE /SRC/APP
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+src/app/node_modules
+src/app/.pnp
+src/app/.pnp.js
+src/app/yarn.lock
+src/app/package-lock.json
 
 # testing
-/coverage
+src/app/coverage
 
 # production
-/build
+src/app/build
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+src/app/.env.local
+src/app/.env.development.local
+src/app/.env.test.local
+src/app/.env.production.local
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#
+# IGNORING SOME FILE INSIDE /SRC/test
+src/test/node_modules
+src/test/.pnp
+src/test/.pnp.js
+src/test/.idea
+
+#
+# IGNORING SOME FILE INSIDE /e2e
+
+#
+# DOCUMENTATION
+out
+/out
+
+# vscode
+.vscode
