@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import route from './routes/routes';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    /**
+     * Provider and PersistGate will be used when redux is enabled
+     */
+    // <Provider store={store}>
+    <BrowserRouter>
+      {/* <PersistGate persistor={persistor}> */}
+      {route.map((e, i) => {
+        const index = i + 1;
+        return (
+          <Switch key={`pages-${index}`}>
+            <Route exact path={e.url}>
+              {e.page}
+            </Route>
+          </Switch>
+        );
+      })}
+      {/* </PersistGate> */}
+    </BrowserRouter>
+  // </Provider>
   );
 }
 
