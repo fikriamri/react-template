@@ -76,12 +76,13 @@ jobs:
             uses: docker/build-push-action@v1
             with:
                 username: ${{ secrets.REGISTRY_USERNAME }}
-                password: ${{ secrets.REGISTRY_PASSWORD }}
+                password-stdin: ${{ secrets.REGISTRY_PASSWORD }}
                 repository: ${{ secrets.IMAGE_NAME_API }}
 #                 registry: ${{ secrets.REGISTRY_URL }}
                 tags: latest
+                path: src/app
 #                 Sementara di tulis disini dulu sampai infra update deployment file env
-#                 build_args: NEXT_PUBLIC_API_BASE_URL=https://minotaur.sumpahpalapa.com/api/v1
+                build_args: REACT_APP_SERVER_LOCATION=DEV
 #         -   name: Deploy
 #             run: |
 #               kubectl -n bayartagihan set image deployment/argus argus=pelabuhan.alterra.dev/${{ secrets.IMAGE_NAME_API }}:latest
