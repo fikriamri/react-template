@@ -1,0 +1,114 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: npm install and build webpack
+        run: |
+          npm install
+          npm run build
+      - uses: actions/upload-artifact@master
+        with:
+          name: webpack artifacts
+
+  test:
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@master
+      with:
+        name: webpack artifacts
+        path: public
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+#     - name: npm install, and test
+#       run: |
+#         npm install
+#         npm test -- --collectCoverage
+#     - name: Setup sonarqube
+#       if: github.event_name == 'push'
+#       uses: warchant/setup-sonar-scanner@v1
+#     - name: Run sonar scanner
+#       if: github.event_name == 'push'
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       run: sonar-scanner -Dsonar.login=${{ secrets.SONAR_TOKEN }}  -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+
+  build-push-staging:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+        -   name: Checkout
+            uses: actions/checkout@v2
+#         -   uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+#             with:
+#               version: '290.0.1'
+#               service_account_key: ${{ secrets.CLOUD_SDK_KEY }}
+#               project_id: innova-271008
+#         -   run: gcloud container clusters get-credentials  innova-staging --zone asia-southeast1-b --project innova-271008
+        -   name: Build and push Docker images API to registry
+            uses: docker/build-push-action@v1
+            with:
+                username: ${{ secrets.REGISTRY_USERNAME }}
+                password: ${{ secrets.REGISTRY_PASSWORD }}
+                repository: ${{ secrets.IMAGE_NAME_API }}
+                registry: ${{ secrets.REGISTRY_URL }}
+                tags: latest
+#                 Sementara di tulis disini dulu sampai infra update deployment file env
+#                 build_args: NEXT_PUBLIC_API_BASE_URL=https://minotaur.sumpahpalapa.com/api/v1
+#         -   name: Deploy
+#             run: |
+#               kubectl -n bayartagihan set image deployment/argus argus=pelabuhan.alterra.dev/${{ secrets.IMAGE_NAME_API }}:latest
+#               kubectl -n bayartagihan patch deployment/argus -p "{\"spec\":{\"template\":{\"metadata\":{\"creationTimestamp\":\"$(date '+%FT%TZ')\"}}}}"
+#   build-push-production:
+#     if: github.event_name == 'release'
+#     runs-on: ubuntu-latest
+#     needs: test
+#     steps:
+#         -   name: Checkout
+#             uses: actions/checkout@v2
+#         -   name: Build and push Docker images API to registry
+#             uses: docker/build-push-action@v1
+#             with:
+#                 username: ${{ secrets.REGISTRY_USERNAME }}
+#                 password: ${{ secrets.REGISTRY_PASSWORD }}
+#                 repository: ${{ secrets.IMAGE_NAME_API }}
+#                 registry: ${{ secrets.REGISTRY_URL }}
+#                 tags: ${{ github.event.release.tag_name }}
+#                 #Sementara di tulis disini dulu sampai infra update deployment file env
+#                 build_args: NEXT_PUBLIC_API_BASE_URL=https://api.bayartagihan.id/api/v1
+
+#         - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+#           with:
+#             version: '290.0.1'
+#             service_account_key: ${{ secrets.CLOUD_SDK_KEY_PROD }}
+#             project_id: innova-271008
+#         - run: gcloud container clusters get-credentials  innova --region asia-southeast1 --project innova-271008
+#         - name: Deploy
+#           run: |
+#               kubectl -n bayartagihan set image deployment/argus argus=pelabuhan.alterra.dev/${{ secrets.IMAGE_NAME_API }}:${{ github.event.release.tag_name }}
+#               kubectl -n bayartagihan patch deployment/argus -p "{\"spec\":{\"template\":{\"metadata\":{\"creationTimestamp\":\"$(date '+%FT%TZ')\"}}}}"
