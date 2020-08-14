@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Navbar from 'react-bootstrap/Navbar';
 import alterraCourseLogo from '../assets/img/logo_navbar@2x.png';
 
