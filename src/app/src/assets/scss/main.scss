@@ -18,7 +18,7 @@ body {
 }
 
 .App-header {
-  background-color: #282c34;
+  // background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  height: 1200px;
+  height: 1000px;
 }
 
 .App-link {
@@ -45,6 +45,8 @@ body {
 .layout-header-fixed {
   .layout-header {
     width: 100%;
+    min-height: 60px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
 
     @media (min-width: 768px) {
       position: fixed;
@@ -63,4 +65,88 @@ body {
     font-weight: 600;
     font-size: 22px;
   }
+}
+
+.layout-content {
+  @media (min-width: 768px) {
+    margin-left: 240px;
+    transition: margin-left 0.3s;
+  }
+}
+
+.layout-sidebar-fixed .layout-sidebar {
+  background-color: var(--white);
+  color: var(--primary);
+
+  .sidenav {
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+
+    &.level-1 {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .sidenav-item.active a {
+      .sidenav-label {
+        color: var(--secondary);
+      }
+    }
+
+    li > a {
+      display: block;
+      font-size: 13px;
+      line-height: 18px;
+      padding: 10px 25px;
+      transition: all 0.3s;
+
+      .icon {
+        display: block;
+        float: left;
+        line-height: 18px;
+        margin-right: 24px;
+        text-align: center;
+        width: 18px;
+        fill: #ffffff;
+
+        img {
+          width: 22px;
+        }
+      }
+
+      .sidenav-label {
+        font-size: 17px;
+      }
+    }
+  }
+  
+  .collapse {
+    display: none !important;
+  }
+
+  @media (min-width: 768px) {
+    display: block;
+    float: left;
+    transition: width 0.3s;
+    width: 240px;
+    z-index: 1020;
+    bottom: 0;
+    box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
+    left: 0;
+    position: fixed;
+    top: 78px;
+
+    .layout-sidebar-body {
+      height: 100%;
+      overflow: auto;
+      width: 100%;
+    }
+
+    .sidenav-collapse {
+      display: block !important;
+    }
+  }
+
+  
 }

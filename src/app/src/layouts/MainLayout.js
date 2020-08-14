@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // Components
 import Header from './Header';
-// import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 // import Footer from './Footer';
 
 /**
@@ -39,8 +39,8 @@ export class MainLayout extends Component {
               {children}
             </div>
           </div>
-          {/* <Sidebar />
-          <Footer /> */}
+          <Sidebar collapsed />
+          {/* <Footer /> */}
         </div>
       </div>
     );

@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Beranda",
+    "type": "Item",
+    "url": "/",
+    "icon": "home"
+  },
+  {
+    "title": "Course",
+    "url": "/course",
+    "icon": "course"
+  },
+  {
+    "title": "User",
+    "url": "/user",
+    "icon": "user"
+  }
+]
