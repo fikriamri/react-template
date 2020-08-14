@@ -7,6 +7,9 @@ import { store, persistor } from './redux/store';
 
 import route from './routes';
 
+import './assets/scss/custom.scss';
+import './assets/scss/main.scss';
+
 function App() {
   return (
     <Provider store={store}>

@@ -26,6 +26,7 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  height: 1200px;
 }
 
 .App-link {
@@ -38,5 +39,28 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.layout-header-fixed {
+  .layout-header {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      position: fixed;
+      z-index: 999;
+    }
+  }
+}
+
+.navbar-light .navbar-brand {
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-left: 10px;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 22px;
   }
 }
