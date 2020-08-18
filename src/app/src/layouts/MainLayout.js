@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // Components
 import Header from './Header';
 import Sidebar from './Sidebar';
-// import Footer from './Footer';
+import Footer from './Footer';
 
 /**
  * @file MainLayout is a React Component that works as a main layout for most of component or page
@@ -40,7 +40,7 @@ export class MainLayout extends Component {
             </div>
           </div>
           <Sidebar collapsed />
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </div>
     );

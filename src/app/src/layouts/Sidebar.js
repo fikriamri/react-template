@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -64,13 +66,11 @@ export class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  loginReducers: PropTypes.shape({
-    hakAkses: PropTypes.string,
-  }).isRequired,
-  collapsed: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]).isRequired,
+  collapsed: PropTypes.bool,
+};
+
+Sidebar.defaultProps = {
+  collapsed: false,
 };
 
 export default Sidebar;

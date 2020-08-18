@@ -71,6 +71,7 @@ body {
   @media (min-width: 768px) {
     margin-left: 240px;
     transition: margin-left 0.3s;
+    margin-bottom: 35px;
   }
 }
 
@@ -89,6 +90,7 @@ body {
     }
 
     .sidenav-item.active a {
+      background-color: #eff0f1;
       .sidenav-label {
         color: var(--secondary);
       }
@@ -100,6 +102,11 @@ body {
       line-height: 18px;
       padding: 10px 25px;
       transition: all 0.3s;
+
+      &:hover {
+        text-decoration: none;
+        background-color: #eff0f1;
+      }
 
       .icon {
         display: block;
@@ -147,6 +154,37 @@ body {
       display: block !important;
     }
   }
+}
 
-  
+.layout-footer {
+  border-top: 1px solid #D6DCE5;
+  color: #19345E;
+  z-index: 1030;
+  min-height: 35px;
+
+  @media (min-width: 768px) {
+    position: fixed;
+    margin-left: 240px;
+    transition: margin-left 0.3s;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .layout-footer-body {
+    padding: 5px 15px;
+
+    .version {
+      float: right;
+    }
+
+    #linkToHomePage {
+      color: var(--secondary);
+    }
+
+    #linkToHomePage:hover {
+      text-decoration: none;
+      color: #bf520a;
+    }
+  }
 }
