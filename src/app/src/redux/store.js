@@ -3,7 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
-import rootReducer from './reducers';
+import reducers from './reducers';
 
 // Enable redux devtools if server location is development
 const composeEnhancers = process.env.REACT_APP_SERVER_LOCATION === 'DEV' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
@@ -16,7 +16,7 @@ const persistConfig = {
 };
 
 // Persisting reducers
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = createStore(
   persistedReducer,

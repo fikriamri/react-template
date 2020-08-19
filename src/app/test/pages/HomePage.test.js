@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import HomePage from '../../src/pages/HomePage';
 import MainLayout from '../../src/layouts/MainLayout';
-import Home from '../../src/components/HomeComponent';
 
 function shallowSetup() {
   const props = {
@@ -22,7 +21,7 @@ describe('<HomePage /> rendering', () => {
     expect(wrapper.find(MainLayout)).toHaveLength(1);
   });
 
-  it('should render a <Home />', () => {
-    expect(wrapper.find(Home)).toHaveLength(1);
+  it('should successfully rendered div.App', () => {
+    expect(wrapper.find('div.App')).toHaveLength(1);
   });
 });
