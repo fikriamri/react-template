@@ -51,14 +51,14 @@ jobs:
         cd src/app
         npm install
         npm run coverage
-#     - name: Setup sonarqube
-#       if: github.event_name == 'push'
-#       uses: warchant/setup-sonar-scanner@v1
-#     - name: Run sonar scanner
-#       if: github.event_name == 'push'
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#       run: sonar-scanner -Dsonar.login=${{ secrets.SONAR_TOKEN }}  -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+    - name: Setup sonarqube
+      if: github.event_name == 'push'
+      uses: warchant/setup-sonar-scanner@v1
+    - name: Run sonar scanner
+      if: github.event_name == 'push'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner -Dsonar.login=${{ secrets.SONAR_TOKEN }}  -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
 
   build-push-staging:
     if: github.event_name == 'push'
