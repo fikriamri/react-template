@@ -43,3 +43,6 @@ out
 
 # vscode
 .vscode
+
+# test-report (it will be generated on CI)
+src/app/test-report.xml
