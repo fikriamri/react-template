@@ -46,10 +46,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-#     - name: npm install, and test
-#       run: |
-#         npm install
-#         npm test -- --collectCoverage
+    - name: npm install, and test
+      run: |
+        cd src/app
+        npm install
+        npm run coverage
 #     - name: Setup sonarqube
 #       if: github.event_name == 'push'
 #       uses: warchant/setup-sonar-scanner@v1
@@ -57,7 +58,11 @@ jobs:
 #       if: github.event_name == 'push'
 #       env:
 #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#       run: sonar-scanner -Dsonar.login=${{ secrets.SONAR_TOKEN }}  -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+#       run: sonar-scanner
+#            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+#            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION_KEY }}
+#            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+#            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
 
   build-push-staging:
     if: github.event_name == 'push'
