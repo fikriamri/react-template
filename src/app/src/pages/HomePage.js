@@ -1,6 +1,7 @@
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import logo from '../assets/img/logo.svg';
+import GoogleBtn from '../components/GoogleBtn';
 
 function HomePage() {
   return (
@@ -23,6 +24,7 @@ function HomePage() {
           >
             Learn React
           </a>
+          <GoogleBtn />
         </header>
       </div>
     </MainLayout>
