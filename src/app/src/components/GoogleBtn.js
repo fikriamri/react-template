@@ -11,7 +11,8 @@ class GoogleBtn extends Component {
 
     this.state = {
       isLogined: false,
-      accessToken: ''
+      accessToken: '',
+      response: {},
     };
 
     this.login = this.login.bind(this);
@@ -24,10 +25,21 @@ class GoogleBtn extends Component {
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
-        accessToken: response.accessToken
+        accessToken: response.accessToken,
+        response
       }));
     }
     console.log('login', response)
+    console.log('If this message appear, it means that this method is called by GoogleLogin button with props isSignIn={true} when you first access the page')
+    console.log('But it won\'t auto relogin when you logged out from your account')
+    /**
+     * Next aku akan membuat komponen login dan logout yang terpisah mengikuti artikel di dev.to, dan menerapkan refreshToken.
+     * Setelah itu aku akan langsung mengerjakan report progress.
+     * Mungkin bisa jadi opsi juga:
+     * - User akan selalu login (dengan refresh token) selama ia tidak keluar dari aplikasi/masih ada tab yang terbuka (fungsi refresh token jalan terus).
+     *   Tapi saat ia keluar, ia harus relogin (tanpa props isSignedIn)
+     * - User akan selalu login kapanpun, selama gmail-nya masih login (menggunakan props isSignedIn) - seperti gmail dan semua aplikasi dari Google
+     */
   }
 
   logout (response) {
@@ -49,26 +61,28 @@ class GoogleBtn extends Component {
   }
 
   render() {
+    console.log('isLogined', this.state.isLogined)
     return (
     <div>
-      { this.state.isLogined ?
-        <GoogleLogout
+      { this.state.isLogined 
+        ? <GoogleLogout
           clientId={ CLIENT_ID }
           buttonText='Logout'
           onLogoutSuccess={ this.logout }
           onFailure={ this.handleLogoutFailure }
-        >
-        </GoogleLogout>: <GoogleLogin
+        />
+        : <GoogleLogin
           clientId={ CLIENT_ID }
           buttonText='Login'
           onSuccess={ this.login }
           onFailure={ this.handleLoginFailure }
           cookiePolicy={ 'single_host_origin' }
           responseType='code,token'
+          isSignedIn={true}
         />
       }
       { this.state.accessToken ? <h5>Your Access Token: <br/><br/> { this.state.accessToken }</h5> : null }
-
+      {/* {JSON.stringify(this.state.response)} */}
     </div>
     )
   }

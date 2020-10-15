@@ -12,7 +12,7 @@ const composeEnhancers = process.env.REACT_APP_SERVER_LOCATION === 'DEV' ? windo
 const persistConfig = {
   key: 'store',
   storage,
-  whitelist: [],
+  whitelist: ['authReducer'],
 };
 
 // Persisting reducers

@@ -1,30 +1,21 @@
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import logo from '../assets/img/logo.svg';
+import { useSelector } from 'react-redux';
 import GoogleBtn from '../components/GoogleBtn';
+import Login from '../components/Login';
+import Logout from '../components/Logout';
 
 function HomePage() {
+  const authReducer = useSelector(state => state.authReducer);
   return (
     <MainLayout>
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit
-            {' '}
-            <code>src/App.js</code>
-            {' '}
-            and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <GoogleBtn />
+          {/* <GoogleBtn /> */}
+          {authReducer.token ? <Logout /> : <Login />}
+          {/* <Login /> */}
+          {/* <Logout /> */}
         </header>
       </div>
     </MainLayout>
