@@ -1,8 +1,7 @@
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
-import logo from '../assets/img/logo.svg';
 import { useSelector } from 'react-redux';
-import GoogleBtn from '../components/GoogleBtn';
+// import GoogleBtn from '../components/GoogleBtn';
 import Login from '../components/Login';
 import Logout from '../components/Logout';
 

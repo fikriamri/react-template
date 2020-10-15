@@ -17,11 +17,6 @@ export default function Logout() {
       <GoogleLogout
         clientId={clientId}
         buttonText="Logout"
-        // render={renderProps => (
-        //   <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-        //     Logout cim
-        //   </button>
-        // )}
         onLogoutSuccess={onSuccess}
       />
     </div>
